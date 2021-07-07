@@ -1,0 +1,46 @@
+<!-- simple ping to test api -->
+<div>
+  <button (click)="ping()">Ping CoinGecko</button>
+  <p *ngIf="this.responseMessage !== ''">{{ this.responseMessage | json }}</p>
+</div>
+
+<!-- input to check price of a coin -->
+<label>Enter Coin</label>
+<input placeholder="BTC/ETH/DOT/?" />
+<!-- return list of all suported coins -->
+
+<!-- some kind of timer -->
+<div>
+  <button (click)="startTimer()">Start Timer</button>
+  <button (click)="pauseTimer()">Pause Timer</button>
+  <p>{{ timeLeft }}</p>
+</div>
+
+<!-- get list of supported coins -->
+<div>
+  <button (click)="getListOfCoins()">Get List Of Coins</button>
+  <!-- <label *ngFor="let coin of this.coinList">
+    <br>
+    {{ coin }}
+  </label> -->
+  <select>
+    <option *ngFor="let coin of this.coinList">
+      {{ coin.symbol }}, {{ coin.current_price | currency }}
+      <button (click)="addCoin(coin)"></button>
+    </option>
+  </select>
+</div>
+
+<div>
+</div>
+
+<div *ngIf="selectedCoins.length; else noSelectedCoins">
+  <h2>Selected Coins</h2>
+  <div *ngFor="let coin of selectedCoins">
+    {{ coin.symbol }}
+  </div>
+</div>
+
+<ng-template #noSelectedCoins>
+  <h2>No Selected Coins</h2>
+</ng-template>
